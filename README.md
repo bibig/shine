@@ -18,7 +18,7 @@ npm install shine
 
   // in routes
   // make a message
-  req.shine('info', 'this is an info);
+  req.shine('info', 'this is an info');
   req.shine('info', 'this is another info: %s', detail);
 
   // render a kind of messages
