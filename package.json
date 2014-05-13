@@ -1,0 +1,27 @@
+{
+  "name": "shine",
+  "version": "0.0.1",
+  "description": "a rich flash message middleware for connect",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bibig/shine"
+  },
+  "dependencies": {
+    "htmler": "*"
+  },
+  "keywords": [
+    "flash",
+    "message",
+    "shine",
+    "middleware"
+  ],
+  "author": "bibig@me.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bibig/shine/issues"
+  }
+}
