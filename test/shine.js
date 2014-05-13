@@ -67,6 +67,18 @@ describe('shine unit test', function () {
 
   });
 
+  it('no duplicate message', function () {
+    var msg = 'have an info';
+    req.shine('info', msg);
+    req.shine('info', msg);
+    req.shine('info', msg);
+
+    (req.session.shine.info.length == 1).should.be.true;
+
+    req.session.shine.info[0].should.eql(msg);
+
+  });
+
 
 
 

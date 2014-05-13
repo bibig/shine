@@ -15,36 +15,44 @@ function create () {
 }
 
 function shine (type, msg) {
-  var msgs;
+  var msgs, pool;
 
   if (this.session === undefined) {
-    throw new Error('shine middleware need session support.');
+    throw new Error('shine need session support.');
   }
 
   this.session.shine = this.session.shine || {};
 
-  // set flash message(s)
-  if (type && msg) {
-    
-    if (arguments.length > 2) {
-      msg = util.format.apply(util, Array.prototype.slice.call(arguments, 1));
-    }
-
-    if ( ! this.session.shine[type] ) { this.session.shine[type] = []; }
-
-    this.session.shine[type].push(msg);
-
-  } else if (type) { // return messages in type
-    msgs = alert.render(type, this.session.shine[type] || []) ;
-
-    delete this.session.shine[type];
-
-    return msgs;
-
-  } else { // return all messages
+  if (arguments.length === 0) { // return all messages
     msgs = alert.renderAll(this.session.shine);
     this.session.shine = {};
+    
     return msgs;
+  } else { 
+    // set flash message(s)
+    pool = this.session.shine[type] = this.session.shine[type] || [];
+
+    // set flash message(s)
+    if (type && msg) {
+      
+      if (arguments.length > 2) {
+        msg = util.format.apply(util, Array.prototype.slice.call(arguments, 1));
+      }
+
+      // no duplicate msg
+      if (pool.indexOf(msg) == -1) {
+        pool.push(msg);
+      }
+
+    } else  { // return messages in type
+      msgs = alert.render(type, pool) ;
+
+      delete this.session.shine[type];
+
+      return msgs;
+
+    }
+
   }
 
 }
