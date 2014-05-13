@@ -1,6 +1,6 @@
 {
   "name": "shine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a rich flash message middleware for connect",
   "main": "index.js",
   "scripts": {
