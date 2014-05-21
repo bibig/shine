@@ -36,7 +36,7 @@ function renderAll (map) {
 }
 
 function box (type, msg) {
-  return div('alert alert-' + type).html(
+  return div('alert alert-' + className(type)).html(
     closeBtn,
     sign(type),
     ' ',
@@ -44,11 +44,35 @@ function box (type, msg) {
   );
 }
 
+function className (type) {
+
+  switch (type) {
+    case 'warning':
+    case 'warn':
+      return 'warning';
+
+    case 'success':
+    case 'ok':
+    case 'yes':
+      return 'success';
+
+    case 'error':
+    case 'danger':
+    case 'fail':
+    case 'no':
+      return 'danger';
+
+    default:
+      return 'info';
+  }
+}
+
 function sign (type) {
   var cls;
 
   switch (type) {
     case 'warning':
+    case 'warn':
       cls = 'glyphicon-warning-sign';
       break;
     case 'success':
