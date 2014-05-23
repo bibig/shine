@@ -2,8 +2,12 @@ module.exports = create;
 
 var util = require('util');
 var alert = require('./alert');
+var alert_hold_seconds = 10;
 
-function create () {
+function create (n) {
+
+  if (n) { alert_hold_seconds = n; }
+
   return function (req, res, next) {
 
     if ( ! req.shine) { 
@@ -27,7 +31,7 @@ function shine (type, msg) {
     msgs = alert.renderAll(this.session.shine);
     this.session.shine = {};
     
-    return msgs;
+    return msgs + alert.autoCloseScript(alert_hold_seconds);
   } else { 
     // set flash message(s)
     pool = this.session.shine[type] = this.session.shine[type] || [];
@@ -49,7 +53,7 @@ function shine (type, msg) {
 
       delete this.session.shine[type];
 
-      return msgs;
+      return msgs + alert.autoCloseScript(alert_hold_seconds);
 
     }
 

@@ -1,5 +1,6 @@
-exports.render = render;
-exports.renderAll = renderAll;
+exports.render          = render;
+exports.renderAll       = renderAll;
+exports.autoCloseScript = autoCloseScript;
 
 var yi       = require('yi');
 var Html     = require('htmler');
@@ -35,8 +36,14 @@ function renderAll (map) {
   return html;
 }
 
+function autoCloseScript (s) {
+  if ( !s || s < 0 ) { return '';}
+  
+  return Html.script().html('$(document).ready(function () {  setTimeout( function () {$(".shine-alert").fadeOut();}, ' + s * 1000 + '); });');
+}
+
 function box (type, msg) {
-  return div('alert alert-' + className(type)).html(
+  return div('shine-alert alert alert-' + className(type)).html(
     closeBtn,
     sign(type),
     ' ',

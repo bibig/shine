@@ -14,7 +14,7 @@ npm install shine
   var app   = express();
   ...
   app.use(session()); // need session middleware.
-  app.use(shine());
+  app.use(shine(10)); // 10 is timeout settings, means the messages will show for 10 seconds
 
   // in routes
   // make a message
